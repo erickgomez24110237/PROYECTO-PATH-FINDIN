@@ -1,0 +1,26 @@
+@startuml
+scale 600 width
+
+[*] --> MENU : Iniciar programa
+
+state MENU {
+    MENU : Evento: Dibujar botones
+    MENU : Evento: Detectar hover / clic
+}
+
+state PLAYING {
+    PLAYING : Evento: Leer teclado (Pacman)
+    PLAYING : Evento: Calcular A* (Fantasma)
+    PLAYING : Evento: Validar límites / Wrap-around
+}
+
+state GAME_OVER {
+    GAME_OVER : Evento: Dibujar pantalla final
+    GAME_OVER : Evento: Detectar elección de usuario
+}
+
+MENU --> PLAYING : Clic en "INICIAR JUEGO"
+PLAYING --> GAME_OVER : Posición Pacman == Posición Fantasma
+GAME_OVER --> PLAYING : Clic en "VOLVER A JUGAR" [resetGame()]
+GAME_OVER --> [*] : Clic en "CERRAR PROGRAMA" [window.close()]
+@enduml
